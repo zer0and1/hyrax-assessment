@@ -8,9 +8,9 @@
     <div class="relative mr-16 flex w-64 max-w-xs flex-1">
       <div class="absolute left-full top-0 flex w-16 justify-center pt-5">
         <button
-          {{on "click" @handleExpandNavigation}}
           type="button"
           class="-m-2.5 p-2.5"
+          {{on "click" @handleExpandNavigation}}
         >
           <span class="sr-only">Close sidebar</span>
           <svg
@@ -42,9 +42,9 @@
                 {{#each @items as |item|}}
                   <li>
                     <a 
-                    href="#"
-                    class="sidebar-item {{if (eq @selectedItemId item.id) 'selected' 'unselected'}}"
-                    {{on "click" (fn @handleSelectItem item.id)}}
+                      href="#"
+                      class="sidebar-item {{if (eq @selectedItemId item.id) 'selected' 'unselected'}}"
+                      {{on "click" (fn @handleSelectItem item.id)}}
                     >
                       {{item.type}} {{item.id}}
                     </a>

@@ -1,0 +1,31 @@
+<div class="sticky top-0 z-40 flex h-16 shrink-0 items-center shadow-sm bg-column-header-background-color">
+  <button
+    {{on "click" @handleExpandNavigation}}
+    type="button"
+    class="p-2.5 bg-column-header-background-color text-white hover:text-gray-300 lg:hidden cursor-pointer"
+  >
+    <span class="sr-only">Open sidebar</span>
+    <svg
+      class="h-6 w-6"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke-width="1.5"
+      stroke="currentColor"
+      aria-hidden="true"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+      />
+    </svg>
+  </button>
+
+  <div
+    class="flex flex-1 self-stretch bg-column-header-background-color px-4"
+  >
+    <div class="flex items-center text-white font-bold uppercase">
+      Results
+    </div>
+  </div>
+</div>

@@ -2,10 +2,9 @@ import Controller from '@ember/controller';
 import { action } from '@ember/object';
 
 export default class ApplicationController extends Controller {
-  isSidebarExpanded = false
-  selectedItemId = 'none'
-  selectedTest = {}
-
+  isSidebarExpanded = false;
+  selectedItemId = 'none';
+  selectedTest = {};
 
   @action
   handleExpandNavigation() {
@@ -18,5 +17,4 @@ export default class ApplicationController extends Controller {
     this.set('selectedItemId', id);
     this.set('selectedTest', selectedTest);
   }
-
 }
