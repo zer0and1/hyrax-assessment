@@ -6,6 +6,7 @@ export default class ApplicationRoute extends Route {
     console.log(mock.data);
     return {
       samples: mock.data.relationships.samples.data,
+      tests: mock.included
     };
   }
 }

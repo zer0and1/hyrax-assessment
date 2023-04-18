@@ -1,11 +1,23 @@
 {{page-title "Hyrax Assessment"}}
 
 <div>
-  <Sidebar @items={{@model.samples}} />
+  <Sidebar
+    @isExpanded={{this.isSidebarExpanded}}
+    @selectedItemId={{this.selectedItemId}}
+    @handleExpandNavigation={{action this.handleExpandNavigation}}
+    @handleSelectItem={{action this.handleSelectItem}}
+    @items={{@model.samples}}
+  />
 
   <div class="lg:pl-64">
-    <div class="sticky top-0 z-40 flex h-16 shrink-0 items-center shadow-sm">
-      <button type="button" class="-m-2.5 p-2.5 text-gray-700 lg:hidden">
+    <div
+      class="sticky top-0 z-40 flex h-16 shrink-0 items-center shadow-sm bg-column-header-background-color"
+    >
+      <button
+        {{on "click" this.handleExpandNavigation}}
+        type="button"
+        class="p-2.5 bg-column-header-background-color text-white hover:text-gray-300 lg:hidden cursor-pointer"
+      >
         <span class="sr-only">Open sidebar</span>
         <svg
           class="h-6 w-6"
@@ -23,7 +35,9 @@
         </svg>
       </button>
 
-      <div class="flex flex-1 self-stretch bg-column-header-background-color px-4">
+      <div
+        class="flex flex-1 self-stretch bg-column-header-background-color px-4"
+      >
         <div class="flex items-center text-white font-bold uppercase">
           Results
         </div>
