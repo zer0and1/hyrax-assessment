@@ -3,9 +3,11 @@ import { action } from '@ember/object';
 
 export default class ApplicationController extends Controller {
   isSidebarExpanded = false;
+  items = [];
   selectedItemId = 'none';
   selectedTest = null;
   selectedTestCalls = null;
+  keyword = "";
 
   @action
   handleExpandNavigation() {
@@ -19,7 +21,16 @@ export default class ApplicationController extends Controller {
     this.set('selectedItemId', id);
     this.set('selectedTest', selectedTest);
     this.set('selectedTestCalls', selectedTestCalls);
-    console.log(selectedTestCalls);
-    console.log(selectedTest);
+  }
+
+  @action
+  handleKeywordChange(event) {
+    this.set('keyword', event.target.value);
+    this.set('items', this.model.samples.filter((sample) => sample.id.contains(this.keyword)))
+  }
+
+  @action
+  handleKeywordReset() {
+    this.set('keyword', '');
   }
 }

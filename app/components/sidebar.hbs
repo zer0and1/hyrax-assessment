@@ -62,22 +62,33 @@
 <div class="hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-64 lg:flex-col">
   <div class="flex flex-col overflow-y-scroll overflow-x-hidden bg-selected-sample-background-color">
     <div class="sidebar-header">
-      <span class="leading-6 font-bold uppercase">Sample Name</span>
+      <input type="text" class="searchbox" value={{@keyword}} placeholder="Sample Name" {{on "keyup" @handleKeywordChange}} />
+      {{#if (gt @keyword.length 0)}}
+        <img class="w-6 h-6 cursor-pointer" {{on "click" @handleKeywordReset}} src="/assets/reset.png"/>
+      {{else}}
+        <img class="w-6 h-6" src="/assets/search.png"/>
+      {{/if}}
     </div>
     <nav class="flex flex-col">
       <ul role="list" class="flex flex-1 flex-col">
         <li>
           <ul role="list" class="-mx-2">
             {{#each @items as |item|}}
+             {{#if (contains item.id @keyword)}}
               <li>
                 <a 
                   href="#"
-                  class="sidebar-item {{if (eq @selectedItemId item.id) 'selected' 'unselected'}}"
+                  class="
+                    sidebar-item 
+                    {{if (eq @selectedItemId item.id) 'selected' 'unselected'}}
+                    {{if item.completed 'completed' 'uncompleted'}}
+                  "
                   {{on "click" (fn @handleSelectItem item.id)}}
                 >
                   {{item.type}} {{item.id}}
                 </a>
               </li>
+             {{/if}}
             {{/each}}
           </ul>
         </li>

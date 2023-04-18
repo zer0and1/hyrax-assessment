@@ -2,11 +2,14 @@
 
 <div>
   <Sidebar
+    @items={{@model.samples}}
+    @keyword={{this.keyword}}
     @isExpanded={{this.isSidebarExpanded}}
     @selectedItemId={{this.selectedItemId}}
-    @handleExpandNavigation={{action this.handleExpandNavigation}}
     @handleSelectItem={{action this.handleSelectItem}}
-    @items={{@model.samples}}
+    @handleKeywordReset={{action this.handleKeywordReset}}
+    @handleKeywordChange={{action this.handleKeywordChange}}
+    @handleExpandNavigation={{action this.handleExpandNavigation}}
   />
 
   <div class="lg:pl-64">
@@ -16,6 +19,7 @@
       <div class="px-2">
         <TestViewer 
           @selectedTest={{this.selectedTest}} 
+          @selectedItemId={{this.selectedItemId}}
           @selectedTestCalls={{this.selectedTestCalls}}
         />
       </div>

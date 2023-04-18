@@ -1,6 +1,8 @@
 <div class="border p-2 border-gray-300 bg-white rounded-md">
   {{#if @selectedTest}}
-    <div class="flex flex-col space-y-3 md:flex-row md:space-y-0 justify-between leading-5 text-tbase-color">
+    <div
+      class="flex flex-col space-y-3 md:flex-row md:space-y-0 justify-between leading-5 text-tbase-color"
+    >
       <div class="flex flex-col space-y-3">
         <div>Name:{{" "}}<b>{{@selectedTest.attributes.name}}</b></div>
         <div>Sample ID:{{" "}}<b>{{@selectedTest.id}}</b></div>
@@ -24,13 +26,17 @@
           >{{@selectedTest.attributes.status}}</b></div>
       </div>
     </div>
-    <div class="flex flex-col space-y-2 md:inline-flex md:flex-row md:space-y-0 md:space-x-2 leading-5 mt-4 text-tbase-color py-2 border-y border-gray-300 w-auto">
+    <div
+      class="flex flex-col space-y-2 md:inline-flex md:flex-row md:space-y-0 md:space-x-2 leading-5 mt-4 text-tbase-color py-2 border-y border-gray-300 w-auto"
+    >
       <div class="flex space-x-1 items-center">
         <span class="w-3 h-3 bg-susceptible-colour rounded-full"></span>
         <span>Susceptible</span>
       </div>
       <div class="flex space-x-1 items-center">
-        <span class="w-3 h-3 bg-intermediate-resistance-colour rounded-full"></span>
+        <span
+          class="w-3 h-3 bg-intermediate-resistance-colour rounded-full"
+        ></span>
         <span>Intermediate</span>
       </div>
       <div class="flex space-x-1 items-center">
@@ -48,62 +54,118 @@
           <table class="min-w-full divide-y divide-bbase-color">
             <thead>
               <tr class="divide-x divide-bbase-color uppercase">
-                <th scope="col" class="py-3.5 pl-4 pr-4 text-left text-sm w-40 font-semibold">Drug Class</th>
-                <th scope="col" class="px-4 py-3.5 text-left text-sm w-10 font-semibold">Drug</th>
-                <th scope="col" class="px-4 py-3.5 text-left text-sm w-10 font-semibold">Call<sup>1</sup></th>
-                <th scope="col" class="py-3.5 pl-4 pr-4 text-left text-sm font-semibold">Mutations</th>
+                <th
+                  scope="col"
+                  class="py-3.5 pl-4 pr-4 text-left text-sm w-40 font-semibold"
+                >Drug Class</th>
+                <th
+                  scope="col"
+                  class="px-4 py-3.5 text-left text-sm w-10 font-semibold"
+                >Drug</th>
+                <th
+                  scope="col"
+                  class="px-4 py-3.5 text-left text-sm w-10 font-semibold"
+                >Call<sup>1</sup></th>
+                <th
+                  scope="col"
+                  class="py-3.5 pl-4 pr-4 text-left text-sm font-semibold"
+                >Mutations</th>
               </tr>
             </thead>
             <tbody class="divide-y divide-bbase-color bg-white">
-              {{#each @selectedTestCalls.attributes.drug_calls as |drugCall index|}}
-                
-                  <tr>
-                    <td rowspan={{drugCall.drugs.length}} class="whitespace-nowrap py-4 pl-4 pr-4 text-sm font-medium border-r border-bbase-color">
-                      {{drugCall.drug_class}}
-                    </td>
-                    {{#if (eq drugCall.drugs.[0].class "S")}}
-                      <td class="whitespace-nowrap p-4 text-sm bg-susceptible-colour border-r border-bbase-color text-tbase-color">{{drugCall.drugs.[0].short_name}}</td>
-                      <td class="whitespace-nowrap p-4 text-sm bg-susceptible-colour text-tbase-color text-center">{{drugCall.drugs.[0].call}}</td>
-                    {{else if (eq drugCall.drugs.[0].class "I")}}
-                      <td class="whitespace-nowrap p-4 text-sm bg-intermediate-resistance-colour border-r border-bbase-color text-tbase-color">{{drugCall.drugs.[0].short_name}}</td>
-                      <td class="whitespace-nowrap p-4 text-sm bg-intermediate-resistance-colour text-tbase-color text-center">{{drugCall.drugs.[0].call}}</td>
-                    {{else}}
-                      <td class="whitespace-nowrap p-4 text-sm bg-resistant-colour border-r border-bbase-color text-tbase-color">{{drugCall.drugs.[0].short_name}}</td>
-                      <td class="whitespace-nowrap p-4 text-sm bg-resistant-colour text-tbase-color text-center">{{drugCall.drugs.[0].call}}</td>
-                    {{/if}}
-                    <td rowspan={{drugCall.drugs.length}} class="whitespace-nowrap py-4 pl-4 pr-4 text-sm font-medium border-l border-bbase-color">
-                      <b>Mutations</b>: {{concat drugCall.mutations}}
-                    </td>
-                  </tr>
-                  {{#each drugCall.drugs as |drug index|}}
-                    {{#if (gt index 0)}}
-                      <tr class="divide-x divide-bbase-color">
-                        {{#if (eq drug.call "S")}}
-                          <td class="whitespace-nowrap p-4 text-sm bg-susceptible-colour text-tbase-color">{{drug.short_name}}</td>
-                          <td class="whitespace-nowrap p-4 text-sm bg-susceptible-colour text-tbase-color text-center">{{drug.call}}</td>
-                        {{else if (eq drug.call "I")}}
-                          <td class="whitespace-nowrap p-4 text-sm bg-intermediate-resistance-colour text-tbase-color">{{drug.short_name}}</td>
-                          <td class="whitespace-nowrap p-4 text-sm bg-intermediate-resistance-colour text-tbase-color text-center">{{drug.call}}</td>
-                        {{else}}
-                          <td class="whitespace-nowrap p-4 text-sm bg-resistant-colour text-tbase-color">{{drug.short_name}}</td>
-                          <td class="whitespace-nowrap p-4 text-sm bg-resistant-colour text-tbase-color text-center">{{drug.call}}</td>
-                        {{/if}}
-                      </tr>    
-                    {{/if}}
-                  {{/each}}
-                  
+              {{#each
+                @selectedTestCalls.attributes.drug_calls
+                as |drugCall index|
+              }}
+
+                <tr>
+                  <td
+                    rowspan={{drugCall.drugs.length}}
+                    class="whitespace-nowrap py-4 pl-4 pr-4 text-sm font-medium border-r border-bbase-color"
+                  >
+                    {{drugCall.drug_class}}
+                  </td>
+                  {{#if (eq drugCall.drugs.0.class "S")}}
+                    <td
+                      class="whitespace-nowrap p-4 text-sm bg-susceptible-colour border-r border-bbase-color text-tbase-color"
+                    >{{drugCall.drugs.0.short_name}}</td>
+                    <td
+                      class="whitespace-nowrap p-4 text-sm bg-susceptible-colour text-tbase-color text-center"
+                    >{{drugCall.drugs.0.call}}</td>
+                  {{else if (eq drugCall.drugs.0.class "I")}}
+                    <td
+                      class="whitespace-nowrap p-4 text-sm bg-intermediate-resistance-colour border-r border-bbase-color text-tbase-color"
+                    >{{drugCall.drugs.0.short_name}}</td>
+                    <td
+                      class="whitespace-nowrap p-4 text-sm bg-intermediate-resistance-colour text-tbase-color text-center"
+                    >{{drugCall.drugs.0.call}}</td>
+                  {{else}}
+                    <td
+                      class="whitespace-nowrap p-4 text-sm bg-resistant-colour border-r border-bbase-color text-tbase-color"
+                    >{{drugCall.drugs.0.short_name}}</td>
+                    <td
+                      class="whitespace-nowrap p-4 text-sm bg-resistant-colour text-tbase-color text-center"
+                    >{{drugCall.drugs.0.call}}</td>
+                  {{/if}}
+                  <td
+                    rowspan={{drugCall.drugs.length}}
+                    class="whitespace-nowrap py-4 pl-4 pr-4 text-sm font-medium border-l border-bbase-color"
+                  >
+                    <b>Mutations</b>:
+                    {{concat drugCall.mutations}}
+                  </td>
+                </tr>
+                {{#each drugCall.drugs as |drug index|}}
+                  {{#if (gt index 0)}}
+                    <tr class="divide-x divide-bbase-color">
+                      {{#if (eq drug.call "S")}}
+                        <td
+                          class="whitespace-nowrap p-4 text-sm bg-susceptible-colour text-tbase-color"
+                        >{{drug.short_name}}</td>
+                        <td
+                          class="whitespace-nowrap p-4 text-sm bg-susceptible-colour text-tbase-color text-center"
+                        >{{drug.call}}</td>
+                      {{else if (eq drug.call "I")}}
+                        <td
+                          class="whitespace-nowrap p-4 text-sm bg-intermediate-resistance-colour text-tbase-color"
+                        >{{drug.short_name}}</td>
+                        <td
+                          class="whitespace-nowrap p-4 text-sm bg-intermediate-resistance-colour text-tbase-color text-center"
+                        >{{drug.call}}</td>
+                      {{else}}
+                        <td
+                          class="whitespace-nowrap p-4 text-sm bg-resistant-colour text-tbase-color"
+                        >{{drug.short_name}}</td>
+                        <td
+                          class="whitespace-nowrap p-4 text-sm bg-resistant-colour text-tbase-color text-center"
+                        >{{drug.call}}</td>
+                      {{/if}}
+                    </tr>
+                  {{/if}}
+                {{/each}}
+
               {{/each}}
             </tbody>
           </table>
+
         </div>
       </div>
     </div>
+    <div class="text-tbase-color mt-4"><sup>1</sup>These resistance calls are based on analysis of sequencing
+      data and do not constitute medical advice. Further, no clinical decision
+      should be based only on them. Please be sure to understand how these calls
+      are made to ensure correct interpretation. For more information please
+      view our terms and conditions at https://exatype.com/terms-of-use or
+      contact us at support@hyraxbio.com Exatype sample ID:
+      {{@selectedItemId}}</div>
   {{else}}
     <div class="flex items-center justify-center my-20">
       <div class="flex flex-col space-y-4 items-center">
         <img src="/assets/select-sample-graphic.png" />
-        <span class="text-tblue-color font-bold max-w-md text-center">To view the results for a sample, click the sample name in the list on the left.</span>
+        <span class="text-tblue-color font-bold max-w-md text-center">To view
+          the results for a sample, click the sample name in the list on the
+          left.</span>
       </div>
-    </div>    
+    </div>
   {{/if}}
 </div>
