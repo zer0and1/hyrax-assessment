@@ -44,7 +44,7 @@ body {
 .searchbox {
   @apply bg-column-header-background-color text-white w-40;
   @apply border-none outline-none ring-0;
-  @apply focus:bg-white focus:text-tbase-color;
+  @apply focus:bg-white focus:text-tbase-color focus:outline-2 focus:outline-gray-300 focus:rounded-sm focus:ring-0;
 }
 
 .searchbox::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
